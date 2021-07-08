@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import MainPage from '@/views/MainPage'
-import store from '../store'
+import store from '@/store'
 // import store from '@/store'
 
 Vue.use(VueRouter)
