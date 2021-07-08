@@ -29,7 +29,10 @@ const fitTemperature = (rawData) => {
   // temperature for 24 hours, request returns a temperature for 48 hours
   const dailyTemp = rawData.hourly
     .map(item => {
-      return kelvinToCelsius(item.temp)
+      return {
+        dt: secondsToTime(item.dt),
+        temp: kelvinToCelsius(item.temp)
+      }
     })
     .splice(0, 24)
   return dailyTemp

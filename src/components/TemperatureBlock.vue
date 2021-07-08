@@ -3,7 +3,7 @@
     <div class="d-flex flex-row">
       <div
         class="temperature-block"
-        v-for="(temp, index) in dailyTemp"
+        v-for="(temp, index) in temperature"
         :key="index"
         :style="temperatureBlockStyle(temp)"
       >
@@ -13,10 +13,10 @@
     <div class="d-flex flex-row">
       <div
         class="hour-block"
-        v-for="n in 24"
-        :key="n"
+        v-for="hour in time"
+        :key="hour"
       >
-        {{n}}:00
+        {{hour}}
       </div>
     </div>
   </div>
@@ -32,6 +32,15 @@ export default {
   methods: {
     temperatureBlockStyle (temperature) {
       return `transform: translateY(-${temperature}px`
+    }
+  },
+
+  computed: {
+    temperature () {
+      return this.dailyTemp.map(item => item.temp)
+    },
+    time () {
+      return this.dailyTemp.map(item => item.dt)
     }
   }
 }

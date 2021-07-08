@@ -4,6 +4,7 @@
       :id="currentWeather.id"
       :name="currentWeather.name"
       :country="currentWeather.country"
+      :coords="currentWeather.coords"
       :weather="currentWeather.weather"
       :lastUpdatedDate="currentWeather.lastUpdatedDate"
       :currentDay="currentWeather.currentDay"
@@ -23,14 +24,18 @@ export default {
     DetailedWeatherCard
   },
 
+  mounted () {
+    this.getDailyTemperature()
+  },
+
   computed: {
     ...mapGetters(['currentWeather', 'dailyTemp'])
   },
 
   methods: {
-    // test () {
-    //   this.$store.dispatch('getDailyTemperature', this.currentWeather.coords)
-    // }
+    getDailyTemperature () {
+      this.$store.dispatch('getDailyTemperature', this.currentWeather.coords)
+    }
   }
 
 }
