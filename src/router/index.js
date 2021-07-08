@@ -27,9 +27,14 @@ const routes = [
         store.dispatch('showDetails', cityId)
         next()
       } else {
-        next('/')
+        next('/not-found')
       }
     }
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: () => import('@/views/NotFoundPage')
   }
 ]
 
