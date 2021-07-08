@@ -28,6 +28,12 @@ class WeatherAPI {
     const query = `${this.url}id=${id}&appid=${API_KEY}`
     return getData(query)
   }
+
+  getTemperature (coords) {
+    const { lon, lat } = coords
+    const query = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,alerts,daily&appid=${API_KEY}`
+    return getData(query)
+  }
 }
 
 const weatherAPI = new WeatherAPI()

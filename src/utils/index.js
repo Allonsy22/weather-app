@@ -6,6 +6,7 @@ const fitData = (rawData) => {
   const currentDay = days[today.getDay()]
   return {
     id: rawData.id,
+    coords: rawData.coord,
     name: rawData.name,
     country: rawData.sys.country,
     lastUpdatedDate,
@@ -22,6 +23,16 @@ const fitData = (rawData) => {
       sunset: secondsToTime(rawData.sys.sunset)
     }
   }
+}
+
+const fitTemperature = (rawData) => {
+  // temperature for 24 hours, request returns a temperature for 48 hours
+  const dailyTemp = rawData.hourly
+    .map(item => {
+      return kelvinToCelsius(item.temp)
+    })
+    .splice(0, 24)
+  return dailyTemp
 }
 
 const kelvinToCelsius = (kelvinTemp) => {
@@ -45,5 +56,6 @@ const secondsToTime = (seconds) => {
 
 export {
   fitData,
-  kelvinToCelsius
+  kelvinToCelsius,
+  fitTemperature
 }

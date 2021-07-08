@@ -49,6 +49,7 @@
         text
         color="teal accent-4"
         small
+        @click="navigateToDetails"
       >
         More
       </v-btn>
@@ -129,6 +130,9 @@ export default {
           this.loading = false
           console.log(err)
         })
+    },
+    navigateToDetails () {
+      this.$router.push({ name: 'Details', params: { id: this.id } })
     }
   }
 

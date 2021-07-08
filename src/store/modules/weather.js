@@ -1,8 +1,9 @@
 import weatherAPI from '@/utils/weatherAPI'
-import { fitData } from '@/utils'
+import { fitData, fitTemperature } from '@/utils'
 
 const state = {
   currentWeather: null,
+  dailyTemp: null,
   citiesList: [],
   loading: false
 }
@@ -13,6 +14,9 @@ const mutations = {
   },
   SET_CITIES_LIST (state, payload) {
     state.citiesList = payload
+  },
+  SET_CURRENT_DAILY_TEMPERATURE (state, payload) {
+    state.dailyTemp = payload
   },
   SET_LOADING_STATUS (state, payload) {
     state.loading = payload
@@ -62,6 +66,22 @@ const actions = {
         })
     })
   },
+  showDetails ({ commit, state }, cityId) {
+    const pickedCity = state.citiesList.find(city => {
+      return city.id === cityId
+    })
+    commit('SET_CURRENT_WEATHER', pickedCity)
+  },
+  getDailyTemperature ({ commit }, coords) {
+    weatherAPI.getTemperature(coords)
+      .then(result => {
+        const dailyTemp = fitTemperature(result.data)
+        commit('SET_CURRENT_DAILY_TEMPERATURE', dailyTemp)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  },
   startPending ({ commit }) {
     commit('SET_LOADING_STATUS', true)
   },
@@ -72,6 +92,7 @@ const actions = {
 
 const getters = {
   currentWeather: state => state.currentWeather,
+  dailyTemp: state => state.dailyTemp,
   citiesList: state => state.citiesList,
   loading: state => state.loading
 }

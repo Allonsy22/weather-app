@@ -9,7 +9,7 @@
 <script>
 import SearchBox from '@/components/SearchBox'
 import WeatherCardList from '@/components/WeatherCard/WeatherCardList'
-import WeatherCardDialog from '@/components/WeatherCard/WeatherCardDialog'
+import WeatherCardDialog from '@/components/Dialog/WeatherCardDialog'
 
 export default {
   name: 'MainPage',
