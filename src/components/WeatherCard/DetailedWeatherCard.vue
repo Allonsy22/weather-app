@@ -4,54 +4,80 @@
       class="mx-auto d-flex flex-column"
       outlined
       max-width="600"
+      :loading="loading"
+      :disabled="loading"
     >
-      <div class="d-flex justify-space-between">
+      <div class="d-flex flex-column justify-space-between flex-sm-row">
         <v-card
-          width="30%"
+          :width="$vuetify.breakpoint.xs ? '100%' : '40%'"
+          height="200"
           class="ma-1"
         >
-          <v-card-title>{{name}}</v-card-title>
-          <div>
-            <span>{{currentDay}}</span>
-            <v-img :src="img"></v-img>
-            <span>{{weather.description}} {{weather.temp}}</span>
+          <v-img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrcGiKultOHu-nzYsuebMzq3JOMxDOGsvdeA&usqp=CAU"
+            class="img"
+          ></v-img>
+          <div class="temperature">
+            {{weather.temp}}
+            <v-icon size="15">mdi-temperature-celsius</v-icon>
+            <p
+              class="caption"
+              style="width: 100px"
+            >{{name}}</p>
+          </div>
+          <div class="icon">
+            <v-img
+              :src="img"
+              height="100"
+              width="100"
+            ></v-img>
+          </div>
+          <div class="description">
+            <p class="ma-0">{{currentDay}}</p>
+            <p class="caption">{{weather.description}}</p>
           </div>
         </v-card>
 
         <v-card
-          width="70%"
+          :width="$vuetify.breakpoint.xs ? '100%' : '60%'"
+          height="200"
           class="ma-1"
         >
-          <v-card-title>{{name}}</v-card-title>
-          <div>
-            <div class="information">{{weather.temp}}<v-icon>mdi-temperature-celsius</v-icon></div>
-            <div class="information">{{weather.humidity}}<v-icon>mdi-water-percent</v-icon></div>
-            <div class="information">{{weather.windSpeed}} m/s<v-icon>mdi-windsock</v-icon></div>
-            <div class="information">{{weather.pressure}}<v-icon>mdi-speedometer</v-icon></div>
-            <div class="information">{{weather.sunrise}}<v-icon>mdi-weather-sunset-up</v-icon></div>
-            <div class="information">{{weather.sunset}}<v-icon>mdi-weather-sunset-down</v-icon></div>
+          <div class="details-container">
+            <p class="information">
+              Humidity: {{weather.humidity}}<v-icon>mdi-water-percent</v-icon>
+            </p>
+            <p class="information">
+              Wind speed: {{weather.windSpeed}} m/s<v-icon>mdi-windsock</v-icon>
+            </p>
+            <p class="information">
+              Pressure: {{weather.pressure}}<v-icon>mdi-speedometer</v-icon>
+            </p>
+            <p class="information">
+              Sunrise at {{weather.sunrise}}<v-icon>mdi-weather-sunset-up</v-icon>
+            </p>
+            <p class="information">
+              Sunset at {{weather.sunset}}<v-icon>mdi-weather-sunset-down</v-icon>
+            </p>
           </div>
+          <div class="last-updated-date">
+            Last updated: {{lastUpdatedDate}}
+          </div>
+          <v-btn
+            text
+            color="teal accent-4"
+            class="button"
+            small
+            right
+            @click="updateWeather"
+          >
+            <v-icon size="20">mdi-cached</v-icon>
+          </v-btn>
         </v-card>
       </div>
       <div class="temperature-container">
-        <v-sheet color="green">
-          <v-sparkline
-            :value="dailyTemp"
-            color="rgba(255, 255, 255, .7)"
-            height="70"
-            padding="12"
-            stroke-linecap="round"
-            label-size="5"
-            smooth="0"
-            line-width="1.2"
-          >
-            <template v-slot:label="item">
-              {{ item.value }}
-            </template>
-          </v-sparkline>
-        </v-sheet>
+        {{dailyTemp}}
       </div>
-      {{dailyTemp}}
     </v-card>
   </div>
 </template>
@@ -71,9 +97,27 @@ export default {
     dailyTemp: Array
   },
 
+  data: () => ({
+    loading: false
+  }),
+
   computed: {
     img () {
       return `http://openweathermap.org/img/wn/${this.weather.icon}@2x.png`
+    }
+  },
+
+  methods: {
+    updateWeather () {
+      this.loading = true
+      this.$store.dispatch('updateWeatherData', this.id)
+        .then(() => {
+          this.loading = false
+        })
+        .catch((err) => {
+          this.loading = false
+          console.log(err)
+        })
     }
   }
 }
@@ -84,4 +128,66 @@ export default {
   width: 90%;
 }
 
+.temperature {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px 10px 0 0;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.description {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.details-container {
+  width: 100%;
+  height: 50%;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.information {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 14px;
+  margin: 0;
+}
+
+.last-updated-date {
+  position: absolute;
+  bottom: 0;
+  margin: 10px;
+  font-size: 10px;
+}
+
+.button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 7px;
+}
+
+.img {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  filter: blur(13px);
+}
 </style>

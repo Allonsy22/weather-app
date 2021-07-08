@@ -5,6 +5,7 @@
     <v-dialog
       v-model="cardDialog"
       width="300"
+      persistent
     >
       <v-card
         :loading="loading"

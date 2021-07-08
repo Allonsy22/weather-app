@@ -83,7 +83,6 @@
             <div class="information">{{weather.sunrise}}<v-icon>mdi-weather-sunset-up</v-icon></div>
             <div class="information">{{weather.sunset}}<v-icon>mdi-weather-sunset-down</v-icon></div>
           </div>
-          <div class="caption">Last updated: {{lastUpdatedDate}}</div>
         </v-card-text>
       </v-card>
     </v-expand-transition>
