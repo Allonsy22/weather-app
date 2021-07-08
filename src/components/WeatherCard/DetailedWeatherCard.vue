@@ -76,16 +76,20 @@
         </v-card>
       </div>
       <div class="temperature-container">
-        {{dailyTemp}}
+        <TemperatureBlock :dailyTemp="dailyTemp"/>
       </div>
     </v-card>
   </div>
 </template>
 
 <script>
+import TemperatureBlock from '@/components/TemperatureBlock'
+
 export default {
   name: 'DetailedWeatherCard',
-
+  components: {
+    TemperatureBlock
+  },
   props: {
     id: Number,
     name: String,
@@ -189,5 +193,10 @@ export default {
   width: 90%;
   height: 90%;
   filter: blur(13px);
+}
+
+.temperature-container {
+  height: 150px;
+  width: 100%;
 }
 </style>
