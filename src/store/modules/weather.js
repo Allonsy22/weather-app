@@ -1,5 +1,5 @@
 import weatherAPI from '@/utils/weatherAPI'
-import Weather from '@/utils/Weather'
+import { fitData } from '@/utils'
 
 const state = {
   currentWeather: null,
@@ -24,7 +24,7 @@ const actions = {
     dispatch('startPending')
     weatherAPI.getByName(name)
       .then(result => {
-        const weatherData = new Weather(result.data).getData()
+        const weatherData = fitData(result.data)
         commit('SET_CURRENT_WEATHER', weatherData)
         dispatch('stopPending')
       })
@@ -49,7 +49,7 @@ const actions = {
       dispatch('startPending')
       weatherAPI.getById(cityId)
         .then(result => {
-          const weatherData = new Weather(result.data).getData()
+          const weatherData = fitData(result.data)
           commit('SET_CURRENT_WEATHER', weatherData)
           dispatch('addCityToList')
           dispatch('stopPending')

@@ -43,10 +43,6 @@ export default {
       if (this.$vuetify.breakpoint.width < 500) return 'card-list-container-mobile'
       return 'card-list-container-desktop'
     }
-  },
-
-  mounted () {
-    this.$store.dispatch('getWeatherByName', 'London')
   }
 
 }
