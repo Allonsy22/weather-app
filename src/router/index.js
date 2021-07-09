@@ -19,6 +19,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '@/views/DetailedPage'),
+    meta: { transitionName: 'zoom' },
     beforeEnter (to, from, next) {
       const cityId = parseInt(to.params.id) // convert the cityId to number
       const citiesList = store.getters.citiesList

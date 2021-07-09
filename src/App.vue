@@ -1,36 +1,20 @@
 <template>
   <v-app>
-    <transition
-      name="fade"
-      mode="out-in"
-    >
+    <zoom-transition>
       <router-view/>
-    </transition>
+    </zoom-transition>
   </v-app>
 </template>
 
 <script>
+import ZoomTransition from '@/components/ZoomTransition'
+
 export default {
-  name: 'App'
+  name: 'App',
+
+  components: {
+    ZoomTransition
+  }
 
 }
 </script>
-
-<style scoped>
-.body {
-  margin: 0;
-  padding: 0;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition-duration: 0.3s;
-  transition-property: opacity;
-  transition-timing-function: ease;
-}
-
-.fade-enter,
-.fade-leave-active {
-  opacity: 0;
-}
-</style>

@@ -1,6 +1,10 @@
 <template>
-  <div class="main-container" v-if="currentWeather">
-    <DetailedWeatherCard
+  <div
+    class="overlay"
+    v-if="currentWeather"
+  >
+    <div class="overlay-inner">
+      <DetailedWeatherCard
       :id="currentWeather.id"
       :name="currentWeather.name"
       :country="currentWeather.country"
@@ -10,6 +14,17 @@
       :currentDay="currentWeather.currentDay"
       :dailyTemp="dailyTemp"
     />
+    </div>
+    <v-btn
+      to="/"
+      absolute
+      top
+      left
+      text
+      small
+    >
+      <v-icon size="35">mdi-home-outline</v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -32,7 +47,16 @@ export default {
 </script>
 
 <style scoped>
-.main-container {
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+}
+
+.overlay-inner {
   width: 100%;
   height: 100vh;
   display: flex;
