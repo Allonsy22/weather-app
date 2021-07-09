@@ -3,18 +3,12 @@ const state = {
 }
 
 const mutations = {
-  SET_CARD_DIALOG_STATUS (state, payload) {
-    state.cardDialog = payload
-  }
+  SET_CARD_DIALOG_STATUS: (state, payload) => (state.cardDialog = payload)
 }
 
 const actions = {
-  openCardDialog ({ commit }) {
-    commit('SET_CARD_DIALOG_STATUS', true)
-  },
-  closeCardDialog ({ commit }) {
-    commit('SET_CARD_DIALOG_STATUS', false)
-  }
+  openCardDialog: ({ commit }) => (commit('SET_CARD_DIALOG_STATUS', true)),
+  closeCardDialog: ({ commit }) => (commit('SET_CARD_DIALOG_STATUS', false))
 }
 
 const getters = {

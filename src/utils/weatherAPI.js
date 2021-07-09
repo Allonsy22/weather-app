@@ -6,9 +6,10 @@ const getData = (query) => {
   return new Promise((resolve, reject) => {
     axios.get(query)
       .then(data => {
+        // timeout for artificial delay
         setTimeout(() => {
           resolve(data)
-        }, 1500)
+        }, 1000)
       })
       .catch(error => reject(error))
   })

@@ -19,10 +19,7 @@
           <div class="temperature">
             {{weather.temp}}
             <v-icon size="15">mdi-temperature-celsius</v-icon>
-            <p
-              class="caption"
-              style="width: 100px;"
-            >{{name}}</p>
+            <p class="caption ma-0">{{currentDay}}</p>
           </div>
           <div class="icon">
             <v-img
@@ -32,7 +29,7 @@
             ></v-img>
           </div>
           <div class="description">
-            <p class="ma-0">{{currentDay}}</p>
+            <p class="ma-0">{{name}}</p>
             <p class="caption">{{weather.description}}</p>
           </div>
         </v-card>
@@ -128,6 +125,7 @@ export default {
 <style scoped>
 .detailed-card-container {
   width: 90%;
+  text-align: center;
 }
 
 .temperature {

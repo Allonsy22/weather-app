@@ -9,36 +9,27 @@ const state = {
 }
 
 const mutations = {
-  SET_CURRENT_WEATHER (state, payload) {
-    state.currentWeather = payload
-  },
-  SET_CITIES_LIST (state, payload) {
-    state.citiesList = payload
-  },
-  SET_CURRENT_DAILY_TEMPERATURE (state, payload) {
-    state.dailyTemp = payload
-  },
-  SET_LOADING_STATUS (state, payload) {
-    state.loading = payload
-  }
+  SET_CURRENT_WEATHER: (state, payload) => (state.currentWeather = payload),
+  SET_CITIES_LIST: (state, payload) => (state.citiesList = payload),
+  SET_CURRENT_DAILY_TEMPERATURE: (state, payload) => (state.dailyTemp = payload),
+  SET_LOADING_STATUS: (state, payload) => (state.loading = payload)
 }
 
 const actions = {
-  getWeatherByName ({ dispatch, commit }, name) {
+  async getWeatherByName ({ dispatch, commit }, cityName) {
     dispatch('startPending')
-    weatherAPI.getByName(name)
-      .then(result => {
-        const weatherData = fitData(result.data)
-        commit('SET_CURRENT_WEATHER', weatherData)
-        dispatch('stopPending')
-      })
-      .catch(error => {
-        console.log(error)
-        dispatch('stopPending')
-      })
+    try {
+      const result = await weatherAPI.getByName(cityName)
+      const weatherData = fitData(result.data)
+      commit('SET_CURRENT_WEATHER', weatherData)
+      dispatch('stopPending')
+    } catch (error) {
+      console.log(error)
+      dispatch('stopPending')
+    }
   },
   addCityToList ({ dispatch, commit, state }) {
-    dispatch('removeCityFromList', state.currentWeather.id) // if a city is in the list, remove it
+    dispatch('removeCityFromList', state.currentWeather.id) // if the city is in the list, remove it
     const newCitiesList = [state.currentWeather, ...state.citiesList]
     commit('SET_CITIES_LIST', newCitiesList)
   },
@@ -72,25 +63,20 @@ const actions = {
     })
     commit('SET_CURRENT_WEATHER', pickedCity)
   },
-  getDailyTemperature ({ dispatch, commit }, coords) {
+  async getDailyTemperature ({ dispatch, commit }, coords) {
     dispatch('startPending')
-    weatherAPI.getTemperature(coords)
-      .then(result => {
-        const dailyTemp = fitTemperature(result.data)
-        commit('SET_CURRENT_DAILY_TEMPERATURE', dailyTemp)
-        dispatch('stopPending')
-      })
-      .catch(error => {
-        console.log(error)
-        dispatch('stopPending')
-      })
+    try {
+      const result = await weatherAPI.getTemperature(coords)
+      const dailyTemp = fitTemperature(result.data)
+      commit('SET_CURRENT_DAILY_TEMPERATURE', dailyTemp)
+      dispatch('stopPending')
+    } catch (error) {
+      console.log(error)
+      dispatch('stopPending')
+    }
   },
-  startPending ({ commit }) {
-    commit('SET_LOADING_STATUS', true)
-  },
-  stopPending ({ commit }) {
-    commit('SET_LOADING_STATUS', false)
-  }
+  startPending: ({ commit }) => (commit('SET_LOADING_STATUS', true)),
+  stopPending: ({ commit }) => (commit('SET_LOADING_STATUS', false))
 }
 
 const getters = {
