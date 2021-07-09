@@ -72,14 +72,17 @@ const actions = {
     })
     commit('SET_CURRENT_WEATHER', pickedCity)
   },
-  getDailyTemperature ({ commit }, coords) {
+  getDailyTemperature ({ dispatch, commit }, coords) {
+    dispatch('startPending')
     weatherAPI.getTemperature(coords)
       .then(result => {
         const dailyTemp = fitTemperature(result.data)
         commit('SET_CURRENT_DAILY_TEMPERATURE', dailyTemp)
+        dispatch('stopPending')
       })
       .catch(error => {
         console.log(error)
+        dispatch('stopPending')
       })
   },
   startPending ({ commit }) {

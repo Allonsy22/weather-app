@@ -9,14 +9,15 @@
         v-for="city in citiesList"
         :key="city.id">
           <SimpleWeatherCard
-          :id="city.id"
-          :name="city.name"
-          :country="city.country"
-          :weather="city.weather"
-          :lastUpdatedDate="city.lastUpdatedDate"
-          :currentDay="city.currentDay"
-          :disabled="loading"
-          inList />
+            :id="city.id"
+            :name="city.name"
+            :country="city.country"
+            :coords="city.coords"
+            :weather="city.weather"
+            :lastUpdatedDate="city.lastUpdatedDate"
+            :currentDay="city.currentDay"
+            :disabled="loading"
+            inList />
       </div>
     </transition-group>
   </div>

@@ -97,6 +97,7 @@ export default {
     id: Number,
     name: String,
     country: String,
+    coords: Object,
     weather: Object,
     lastUpdatedDate: String,
     currentDay: String,
@@ -123,6 +124,7 @@ export default {
       this.loading = true
       this.$store.dispatch('updateWeatherData', this.id)
         .then(() => {
+          this.$store.dispatch('getDailyTemperature', this.coords)
           this.loading = false
         })
         .catch((err) => {

@@ -1,5 +1,5 @@
 <template>
-  <div class="temperature-container">
+  <v-card class="temperature-container">
     <div class="d-flex flex-row">
       <div
         class="temperature-block"
@@ -10,7 +10,7 @@
         {{temp}}
       </div>
     </div>
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row mb-1">
       <div
         class="hour-block"
         v-for="hour in time"
@@ -19,7 +19,7 @@
         {{hour}}
       </div>
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -48,6 +48,7 @@ export default {
 
 <style scoped>
 .temperature-container {
+  height: inherit;
   display: flex;
   flex-direction: column;
   align-items: center;

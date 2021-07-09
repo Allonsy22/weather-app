@@ -24,18 +24,8 @@ export default {
     DetailedWeatherCard
   },
 
-  mounted () {
-    this.getDailyTemperature()
-  },
-
   computed: {
     ...mapGetters(['currentWeather', 'dailyTemp'])
-  },
-
-  methods: {
-    getDailyTemperature () {
-      this.$store.dispatch('getDailyTemperature', this.currentWeather.coords)
-    }
   }
 
 }

@@ -75,15 +75,19 @@
           </v-btn>
         </v-card>
       </div>
-      <div class="temperature-container">
+      <v-card
+        height="150"
+        :disabled="loading"
+      >
         <TemperatureBlock :dailyTemp="dailyTemp"/>
-      </div>
+      </v-card>
     </v-card>
   </div>
 </template>
 
 <script>
 import TemperatureBlock from '@/components/TemperatureBlock'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'DetailedWeatherCard',
@@ -102,11 +106,8 @@ export default {
     dailyTemp: Array
   },
 
-  data: () => ({
-    loading: false
-  }),
-
   computed: {
+    ...mapGetters(['loading']),
     img () {
       return `http://openweathermap.org/img/wn/${this.weather.icon}@2x.png`
     }
@@ -114,14 +115,11 @@ export default {
 
   methods: {
     updateWeather () {
-      this.loading = true
       this.$store.dispatch('updateWeatherData', this.id)
         .then(() => {
-          this.loading = false
           this.$store.dispatch('getDailyTemperature', this.coords)
         })
         .catch((err) => {
-          this.loading = false
           console.log(err)
         })
     }
@@ -197,8 +195,4 @@ export default {
   filter: blur(13px);
 }
 
-.temperature-container {
-  height: 150px;
-  width: 100%;
-}
 </style>
