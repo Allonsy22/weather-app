@@ -9,6 +9,7 @@
       label="City"
       placeholder="Select..."
       required
+      color="white"
       @input="getWeather"
       @keydown.enter="getWeather"
     ></v-autocomplete>

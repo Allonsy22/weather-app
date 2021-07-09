@@ -52,7 +52,7 @@
       >
         More
       </v-btn>
-
+      <v-spacer></v-spacer>
       <v-btn
         text
         color="teal accent-4"

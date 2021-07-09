@@ -11,7 +11,6 @@
         <v-card
           :width="$vuetify.breakpoint.xs ? '100%' : '40%'"
           height="200"
-          class="ma-1"
         >
           <v-img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrcGiKultOHu-nzYsuebMzq3JOMxDOGsvdeA&usqp=CAU"
@@ -41,7 +40,6 @@
         <v-card
           :width="$vuetify.breakpoint.xs ? '100%' : '60%'"
           height="200"
-          class="ma-1"
         >
           <div class="details-container">
             <p class="information">
