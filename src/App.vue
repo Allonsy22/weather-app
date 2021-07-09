@@ -31,6 +31,6 @@ export default {
 
 .fade-enter,
 .fade-leave-active {
-  opacity: 0
+  opacity: 0;
 }
 </style>

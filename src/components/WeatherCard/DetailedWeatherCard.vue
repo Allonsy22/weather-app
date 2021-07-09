@@ -22,7 +22,7 @@
             <v-icon size="15">mdi-temperature-celsius</v-icon>
             <p
               class="caption"
-              style="width: 100px"
+              style="width: 100px;"
             >{{name}}</p>
           </div>
           <div class="icon">
