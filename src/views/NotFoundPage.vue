@@ -28,8 +28,8 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgb(255,255,255);
-  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(94,82,255,1) 100%);
+  background: rgb(255, 255, 255);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(94, 82, 255, 1) 100%);
 }
 
 .overlay-inner {

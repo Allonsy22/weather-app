@@ -39,7 +39,6 @@ export default {
       }
 
       this.transitionName = transitionName
-
       next()
     })
   },
@@ -49,9 +48,7 @@ export default {
     },
     enter (element) {
       const { height } = getComputedStyle(element)
-
       element.style.height = this.prevHeight
-
       setTimeout(() => {
         element.style.height = height
       })
@@ -60,7 +57,6 @@ export default {
       element.style.height = 'auto'
     }
   }
-
 }
 </script>
 

@@ -29,7 +29,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgb(255,255,255);
-  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(94,82,255,1) 100%);
+  background: rgb(255, 255, 255);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(94, 82, 255, 1) 100%);
 }
 </style>
