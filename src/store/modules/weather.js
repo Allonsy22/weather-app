@@ -28,6 +28,18 @@ const actions = {
       dispatch('stopPending')
     }
   },
+  async getWeatherByLocation ({ dispatch, commit }, coords) {
+    dispatch('startPending')
+    try {
+      const result = await weatherAPI.getByLocation(coords)
+      const weatherData = fitData(result.data)
+      commit('SET_CURRENT_WEATHER', weatherData)
+      dispatch('stopPending')
+    } catch (error) {
+      console.log(error)
+      dispatch('stopPending')
+    }
+  },
   addCityToList ({ dispatch, commit, state }) {
     dispatch('removeCityFromList', state.currentWeather.id) // if the city is in the list, remove it
     const newCitiesList = [state.currentWeather, ...state.citiesList]
