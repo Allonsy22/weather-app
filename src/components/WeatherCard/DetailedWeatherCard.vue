@@ -11,11 +11,8 @@
         <v-card
           :width="$vuetify.breakpoint.xs ? '100%' : '40%'"
           height="200"
+          class="background"
         >
-          <v-img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrcGiKultOHu-nzYsuebMzq3JOMxDOGsvdeA&usqp=CAU"
-            class="img"
-          ></v-img>
           <div class="temperature">
             {{weather.temp}}
             <v-icon size="15">mdi-temperature-celsius</v-icon>
@@ -184,11 +181,8 @@ export default {
   margin: 7px;
 }
 
-.img {
-  position: absolute;
-  width: 90%;
-  height: 90%;
-  filter: blur(13px);
+.background {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(171, 166, 255, 1) 100%);
 }
-
 </style>

@@ -1,6 +1,9 @@
 <template>
   <v-card class="temperature-container">
-    <div class="d-flex flex-row">
+    <div
+      class="d-flex flex-row justify-space-around pa-2"
+      style="width: 100%;"
+    >
       <div
         class="temperature-block"
         v-for="(temp, index) in temperature"
@@ -10,7 +13,10 @@
         {{temp}}
       </div>
     </div>
-    <div class="d-flex flex-row mb-1">
+    <div
+      class="d-flex flex-row mb-1 justify-space-around pa-2"
+      style="width: 100%;"
+    >
       <div
         class="hour-block"
         v-for="hour in time"
@@ -70,7 +76,6 @@ export default {
   width: 20px;
   height: 20px;
   border-bottom: 1px solid black;
-  margin: 1px;
   text-align: center;
   font-size: 12px;
 }
@@ -79,8 +84,7 @@ export default {
   width: 20px;
   height: 45px;
   border-bottom: 1px solid black;
-  margin: 1px;
-  text-align: center;
+  line-height: 20px;
   font-size: 11px;
   writing-mode: vertical-rl;
   text-orientation: mixed;
