@@ -1,7 +1,7 @@
 <template>
   <v-card
     v-if="id"
-    class="mx-auto mt-2 mb-2"
+    class="mx-auto mt-2 mb-2 background"
     width="200"
     height="200"
     max-width="200"
@@ -25,22 +25,24 @@
           <v-icon color="red lighten-2">mdi-close</v-icon>
         </v-btn>
       </div>
-      <p class="text-h8 text--primary ma-0">
+      <p
+        class="text-h8 text--primary ma-0"
+        style="width: 160px;"
+      >
         {{name}},{{country}}
       </p>
       <p class="ma-0">
-        {{currentDay}}
+        {{weather.temp}}<v-icon>mdi-temperature-celsius</v-icon>
       </p>
       <div class="weather-info-container">
         <div class="icon-container text-center">
           <v-img
             :src="img"
-            width="70"
-            height="70"
+            width="60"
+            height="60"
           ></v-img>
           <p class="ma-0">{{weather.main}}</p>
         </div>
-        <p>{{weather.temp}}<v-icon>mdi-temperature-celsius</v-icon></p>
       </div>
     </v-card-text>
     <v-card-actions v-if="inList">
@@ -66,7 +68,7 @@
     <v-expand-transition>
       <v-card
         v-if="reveal"
-        class="transition-fast-in-fast-out v-card--reveal"
+        class="transition-fast-in-fast-out v-card--reveal background"
         style="height: 100%;"
         @click="reveal = false"
       >
@@ -74,7 +76,7 @@
           <p class="text-h6 text--primary ma-0 text-capitalize">
             {{weather.description}}
           </p>
-          <div class="details-container">
+          <div class="details-container mb-2">
             <div class="information">{{weather.temp}}<v-icon>mdi-temperature-celsius</v-icon></div>
             <div class="information">{{weather.humidity}}<v-icon>mdi-water-percent</v-icon></div>
             <div class="information">{{weather.windSpeed}} m/s<v-icon>mdi-windsock</v-icon></div>
@@ -82,6 +84,7 @@
             <div class="information">{{weather.sunrise}}<v-icon>mdi-weather-sunset-up</v-icon></div>
             <div class="information">{{weather.sunset}}<v-icon>mdi-weather-sunset-down</v-icon></div>
           </div>
+          <p class="ma-0 caption">Last updated: {{lastUpdatedDate}}</p>
         </v-card-text>
       </v-card>
     </v-expand-transition>
@@ -176,5 +179,10 @@ export default {
   position: absolute;
   top: 5px;
   right: 5px;
+}
+
+.background {
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(171,166,255,1) 100%);
 }
 </style>
