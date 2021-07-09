@@ -37,9 +37,19 @@ export default {
 
   computed: {
     temperature () {
+      if (this.$vuetify.breakpoint.xs) {
+        return this.dailyTemp
+          .map(item => item.temp)
+          .filter((item, index) => index % 2 === 0)
+      }
       return this.dailyTemp.map(item => item.temp)
     },
     time () {
+      if (this.$vuetify.breakpoint.xs) {
+        return this.dailyTemp
+          .map(item => item.dt)
+          .filter((item, index) => index % 2 === 0)
+      }
       return this.dailyTemp.map(item => item.dt)
     }
   }

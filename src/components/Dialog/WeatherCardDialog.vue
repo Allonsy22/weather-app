@@ -46,7 +46,7 @@
             text
             @click="submit"
           >
-            GOT IT
+            OK
           </v-btn>
         </v-card-actions>
       </v-card>

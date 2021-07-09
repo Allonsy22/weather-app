@@ -14,18 +14,17 @@
       class="pa-2 pointer"
       @click="reveal = true"
     >
-      <v-btn
-        v-if="inList"
-        absolute
-        right
-        top
-        x-small
-        text
-        class="pa-0"
-        @click="removeCity"
-      >
-        <v-icon color="red lighten-2">mdi-close</v-icon>
-      </v-btn>
+      <div class="delete-button">
+        <v-btn
+          v-if="inList"
+          x-small
+          text
+          class="pa-0"
+          @click="removeCity"
+        >
+          <v-icon color="red lighten-2">mdi-close</v-icon>
+        </v-btn>
+      </div>
       <p class="text-h8 text--primary ma-0">
         {{name}},{{country}}
       </p>
@@ -171,5 +170,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 </style>
