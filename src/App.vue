@@ -1,6 +1,9 @@
 <template>
   <v-app>
-    <zoom-transition>
+    <ErrorBlock
+      v-if="errors.length"
+      :errors="errors"/>
+    <zoom-transition v-else>
       <router-view/>
     </zoom-transition>
     <GoToButton />
@@ -10,13 +13,24 @@
 <script>
 import ZoomTransition from '@/components/ZoomTransition'
 import GoToButton from '@/components/GoToButton'
+import ErrorBlock from '@/components/ErrorBlock'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
 
   components: {
     ZoomTransition,
-    GoToButton
+    GoToButton,
+    ErrorBlock
+  },
+
+  mounted () {
+    this.$store.dispatch('clearErrorList')
+  },
+
+  computed: {
+    ...mapGetters(['errors'])
   }
 }
 </script>

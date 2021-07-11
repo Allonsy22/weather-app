@@ -5,14 +5,16 @@ const state = {
   currentWeather: null,
   dailyTemp: null,
   citiesList: [],
-  loading: false
+  loading: false,
+  errors: []
 }
 
 const mutations = {
   SET_CURRENT_WEATHER: (state, payload) => (state.currentWeather = payload),
   SET_CITIES_LIST: (state, payload) => (state.citiesList = payload),
   SET_CURRENT_DAILY_TEMPERATURE: (state, payload) => (state.dailyTemp = payload),
-  SET_LOADING_STATUS: (state, payload) => (state.loading = payload)
+  SET_LOADING_STATUS: (state, payload) => (state.loading = payload),
+  SET_ERRORS: (state, payload) => (state.errors = payload)
 }
 
 const actions = {
@@ -24,7 +26,7 @@ const actions = {
       commit('SET_CURRENT_WEATHER', weatherData)
       dispatch('stopPending')
     } catch (error) {
-      console.log(error)
+      dispatch('addError', error.message)
       dispatch('stopPending')
     }
   },
@@ -36,7 +38,7 @@ const actions = {
       commit('SET_CURRENT_WEATHER', weatherData)
       dispatch('stopPending')
     } catch (error) {
-      console.log(error)
+      dispatch('addError', error.message)
       dispatch('stopPending')
     }
   },
@@ -63,7 +65,7 @@ const actions = {
           resolve()
         })
         .catch(error => {
-          console.log(error)
+          dispatch('addError', error.message)
           dispatch('stopPending')
           reject(error)
         })
@@ -83,10 +85,15 @@ const actions = {
       commit('SET_CURRENT_DAILY_TEMPERATURE', dailyTemp)
       dispatch('stopPending')
     } catch (error) {
-      console.log(error)
+      dispatch('addError', error.message)
       dispatch('stopPending')
     }
   },
+  addError ({ commit, state }, errorMsg) {
+    const errors = [...state.errors, errorMsg]
+    commit('SET_ERRORS', errors)
+  },
+  clearErrorList: ({ commit }) => (commit('SET_ERRORS', [])),
   startPending: ({ commit }) => (commit('SET_LOADING_STATUS', true)),
   stopPending: ({ commit }) => (commit('SET_LOADING_STATUS', false))
 }
@@ -95,7 +102,8 @@ const getters = {
   currentWeather: state => state.currentWeather,
   dailyTemp: state => state.dailyTemp,
   citiesList: state => state.citiesList,
-  loading: state => state.loading
+  loading: state => state.loading,
+  errors: state => state.errors
 }
 
 const weatherModule = {
